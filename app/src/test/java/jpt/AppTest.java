@@ -24,4 +24,21 @@ class AppTest {
         // We just ensure it runs without throwing exceptions.  
     }
 
+    @Test
+    void testProcessBuilderDemo() {
+        try {
+            Jprocess.processBuilderDemo();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Exception thrown during Jprocess.processBuilderDemo()");  
+        }
+    }
+
+    @Test
+    void testProcessHandleDemo() {
+        Jprocess.processHandleDemo();
+        // Since this method prints to console, we can't assert its output easily.
+        // We just ensure it runs without throwing exceptions.  
+    }
+
 }

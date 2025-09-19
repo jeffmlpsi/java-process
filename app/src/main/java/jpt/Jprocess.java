@@ -38,4 +38,31 @@ public class Jprocess {
         info.user().ifPresent(user -> System.out.println("User: " + user));
     }
 
+    public static void processBuilderDemo() throws Exception {
+        ProcessBuilder pb = new ProcessBuilder("date");
+        pb.redirectErrorStream(true); // Merge stdout and stderr
+
+        Process process = pb.start();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        int exitCode = process.waitFor();
+        System.out.println("Exited with code: " + exitCode);
+    }  
+    
+    public static void processHandleDemo() {
+        ProcessHandle.allProcesses()
+            .forEach(ph -> {
+                long pid = ph.pid();
+                ProcessHandle.Info info = ph.info();
+                System.out.println("PID: " + pid);
+                info.command().ifPresent(cmd -> System.out.println("  Command: " + cmd));
+                info.user().ifPresent(user -> System.out.println("  User: " + user));
+            });
+    }   
+
 }
